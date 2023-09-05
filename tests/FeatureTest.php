@@ -93,6 +93,7 @@ class FeatureTest extends TestCase
 
         // Assert - Filtered likes count by type
         $this->assertSame(2, $user->likes()->withType(Book::class)->count(), 'User should have 2 book likes');
+        $this->assertSame(4, $user->totalLikes);
     }
 
     public function test_user_can_like_another_user()

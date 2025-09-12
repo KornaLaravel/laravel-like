@@ -9,7 +9,7 @@ use Overtrue\LaravelLike\Events\Unliked;
 
 class FeatureTest extends TestCase
 {
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -412,7 +412,8 @@ class FeatureTest extends TestCase
     public function test_like_model_uses_custom_model_class()
     {
         // Arrange - Create custom like model
-        $customLikeModel = new class () extends \Overtrue\LaravelLike\Like {
+        $customLikeModel = new class extends \Overtrue\LaravelLike\Like
+        {
             protected $table = 'likes';
         };
 
@@ -428,10 +429,6 @@ class FeatureTest extends TestCase
         $this->assertInstanceOf(get_class($customLikeModel), $like, 'Should use custom like model class');
     }
 
-    /**
-     * @param  \Closure  $callback
-     * @return \Illuminate\Support\Collection
-     */
     protected function getQueryLog(\Closure $callback): \Illuminate\Support\Collection
     {
         $sqls = \collect([]);

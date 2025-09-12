@@ -13,10 +13,6 @@ use Overtrue\LaravelLike\Like;
 
 trait Liker
 {
-    /**
-     * @param  \Illuminate\Database\Eloquent\Model  $object
-     * @return Like
-     */
     public function like(Model $object): Like
     {
         $attributes = [
@@ -43,9 +39,6 @@ trait Liker
     }
 
     /**
-     * @param  \Illuminate\Database\Eloquent\Model  $object
-     * @return bool
-     *
      * @throws \Exception
      */
     public function unlike(Model $object): bool
@@ -69,7 +62,6 @@ trait Liker
     }
 
     /**
-     * @param  \Illuminate\Database\Eloquent\Model  $object
      * @return Like|null
      *
      * @throws \Exception
@@ -79,16 +71,12 @@ trait Liker
         return $this->hasLiked($object) ? $this->unlike($object) : $this->like($object);
     }
 
-    /**
-     * @param  \Illuminate\Database\Eloquent\Model  $object
-     * @return bool
-     */
     public function hasLiked(Model $object): bool
     {
         return ($this->relationLoaded('likes') ? $this->likes : $this->likes())
-                ->where('likeable_id', $object->getKey())
-                ->where('likeable_type', $object->getMorphClass())
-                ->count() > 0;
+            ->where('likeable_id', $object->getKey())
+            ->where('likeable_type', $object->getMorphClass())
+            ->count() > 0;
     }
 
     public function likes(): HasMany
@@ -111,7 +99,7 @@ trait Liker
         );
     }
 
-    public function attachLikeStatus(&$likeables, callable $resolver = null)
+    public function attachLikeStatus(&$likeables, ?callable $resolver = null)
     {
         $likes = $this->likes()->get()->keyBy(function ($item) {
             return \sprintf('%s:%s', $item->likeable_type, $item->likeable_id);

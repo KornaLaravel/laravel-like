@@ -99,6 +99,11 @@ class FeatureTest extends TestCase
         $this->assertSame(2, $user->likes()->withType(Book::class)->count());
 >>>>>>> fc2847d (totalLikers attribute)
         $this->assertSame(4, $user->totalLikes);
+        // Assert - Total likes count
+        $this->assertSame(4, $user->likes()->count(), 'User should have 4 total likes');
+
+        // Assert - Filtered likes count by type
+        $this->assertSame(2, $user->likes()->withType(Book::class)->count(), 'User should have 2 book likes');
     }
 
     public function test_user_can_like_another_user()
@@ -418,8 +423,12 @@ class FeatureTest extends TestCase
     public function test_like_model_uses_custom_model_class()
     {
         // Arrange - Create custom like model
+<<<<<<< HEAD
         $customLikeModel = new class extends \Overtrue\LaravelLike\Like
         {
+=======
+        $customLikeModel = new class () extends \Overtrue\LaravelLike\Like {
+>>>>>>> 9d061df (完善测试用例：提升语义化和覆盖率)
             protected $table = 'likes';
         };
 

@@ -413,17 +413,8 @@ class FeatureTest extends TestCase
     public function test_like_model_uses_custom_model_class()
     {
         // Arrange - Create custom like model
-<<<<<<< HEAD
-<<<<<<< HEAD
         $customLikeModel = new class extends \Overtrue\LaravelLike\Like
         {
-=======
-        $customLikeModel = new class () extends \Overtrue\LaravelLike\Like {
->>>>>>> 9d061df (完善测试用例：提升语义化和覆盖率)
-=======
-        $customLikeModel = new class extends \Overtrue\LaravelLike\Like
-        {
->>>>>>> 41a043b (修复代码格式问题)
             protected $table = 'likes';
         };
 

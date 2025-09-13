@@ -33,24 +33,9 @@
             "providers": [
                 "Overtrue\\LaravelLike\\LikeServiceProvider"
             ]
-        },
-        "hooks": {
-            "pre-commit": [
-                "composer fix-style",
-                "composer test"
-            ],
-            "post-merge": "composer install"
         }
     },
     "scripts": {
-        "post-update-cmd": [
-            "cghooks update"
-        ],
-        "post-install-cmd": [
-            "cghooks add --ignore-lock",
-            "cghooks update"
-        ],
-        "cghooks": "vendor/bin/cghooks",
         "check-style": "vendor/bin/pint --test",
         "fix-style": "vendor/bin/pint",
         "test": "vendor/bin/phpunit --colors=always"

@@ -2,6 +2,4 @@
 
 namespace Overtrue\LaravelLike\Events;
 
-class Liked extends Event
-{
-}
+class Liked extends Event {}

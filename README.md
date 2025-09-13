@@ -161,6 +161,7 @@ Of course we have a better solution, which can be found in the following section
 You can use `Liker::attachLikeStatus($likeables)` to attach the user like status, it will attach `has_liked` attribute to each model of `$likeables`:
 
 #### For model
+
 ```php
 $post = Post::find(1);
 
@@ -176,7 +177,7 @@ $post = $user->attachLikeStatus($post);
  ],
 ```
 
-#### For `Collection | Paginator | LengthAwarePaginator | array`:
+#### For `Collection | Paginator | LengthAwarePaginator | array`
 
 ```php
 $posts = Post::oldest('id')->get();
@@ -228,12 +229,12 @@ $user->attachLikeStatus($posts);
 
 ## Related packages
 
--   Follow: [overtrue/laravel-follow](https://github.com/overtrue/laravel-follow)
--   Like: [overtrue/laravel-like](https://github.com/overtrue/laravel-like)
--   Favorite: [overtrue/laravel-favorite](https://github.com/overtrue/laravel-favorite)
--   Subscribe: [overtrue/laravel-subscribe](https://github.com/overtrue/laravel-subscribe)
--   Vote: [overtrue/laravel-vote](https://github.com/overtrue/laravel-vote)
--   Bookmark: overtrue/laravel-bookmark (working in progress)
+- Follow: [overtrue/laravel-follow](https://github.com/overtrue/laravel-follow)
+- Like: [overtrue/laravel-like](https://github.com/overtrue/laravel-like)
+- Favorite: [overtrue/laravel-favorite](https://github.com/overtrue/laravel-favorite)
+- Subscribe: [overtrue/laravel-subscribe](https://github.com/overtrue/laravel-subscribe)
+- Vote: [overtrue/laravel-vote](https://github.com/overtrue/laravel-vote)
+- Bookmark: overtrue/laravel-bookmark (working in progress)
 
 ## :heart: Sponsor me
 

@@ -3,9 +3,11 @@
 namespace Tests;
 
 use Illuminate\Database\Eloquent\Relations\Relation;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Event;
 use Overtrue\LaravelLike\Events\Liked;
 use Overtrue\LaravelLike\Events\Unliked;
+use Overtrue\LaravelLike\Like;
 
 class FeatureTest extends TestCase
 {
@@ -257,7 +259,7 @@ class FeatureTest extends TestCase
 
         // Act & Assert - First toggle should like the post
         $like = $user->toggleLike($post);
-        $this->assertInstanceOf(\Overtrue\LaravelLike\Like::class, $like, 'Toggle should return Like instance when liking');
+        $this->assertInstanceOf(Like::class, $like, 'Toggle should return Like instance when liking');
         $this->assertTrue($user->hasLiked($post), 'User should have liked the post after toggle');
 
         // Act & Assert - Second toggle should unlike the post
@@ -319,8 +321,8 @@ class FeatureTest extends TestCase
         $user->like($book);
 
         // Act & Assert - Scope should filter by type
-        $postLikes = \Overtrue\LaravelLike\Like::withType(Post::class)->get();
-        $bookLikes = \Overtrue\LaravelLike\Like::withType(Book::class)->get();
+        $postLikes = Like::withType(Post::class)->get();
+        $bookLikes = Like::withType(Book::class)->get();
 
         $this->assertCount(1, $postLikes, 'Should have 1 post like');
         $this->assertCount(1, $bookLikes, 'Should have 1 book like');
@@ -385,7 +387,7 @@ class FeatureTest extends TestCase
 
         // Assert - Liked event should contain correct data
         Event::assertDispatched(Liked::class, function ($event) use ($user, $post) {
-            return $event->like instanceof \Overtrue\LaravelLike\Like
+            return $event->like instanceof Like
                 && $event->like->user_id === $user->id
                 && $event->like->likeable_id === $post->id
                 && $event->like->likeable_type === $post->getMorphClass();
@@ -396,7 +398,7 @@ class FeatureTest extends TestCase
 
         // Assert - Unliked event should contain correct data
         Event::assertDispatched(Unliked::class, function ($event) use ($user, $post) {
-            return $event->like instanceof \Overtrue\LaravelLike\Like
+            return $event->like instanceof Like
                 && $event->like->user_id === $user->id
                 && $event->like->likeable_id === $post->id
                 && $event->like->likeable_type === $post->getMorphClass();
@@ -413,7 +415,7 @@ class FeatureTest extends TestCase
     public function test_like_model_uses_custom_model_class()
     {
         // Arrange - Create custom like model
-        $customLikeModel = new class extends \Overtrue\LaravelLike\Like
+        $customLikeModel = new class extends Like
         {
             protected $table = 'likes';
         };
@@ -430,7 +432,7 @@ class FeatureTest extends TestCase
         $this->assertInstanceOf(get_class($customLikeModel), $like, 'Should use custom like model class');
     }
 
-    protected function getQueryLog(\Closure $callback): \Illuminate\Support\Collection
+    protected function getQueryLog(\Closure $callback): Collection
     {
         $sqls = \collect([]);
         \DB::listen(function ($query) use ($sqls) {

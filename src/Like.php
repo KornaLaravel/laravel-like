@@ -4,6 +4,8 @@ namespace Overtrue\LaravelLike;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Support\Str;
 use Overtrue\LaravelLike\Events\Liked;
 use Overtrue\LaravelLike\Events\Unliked;
@@ -38,13 +40,13 @@ class Like extends Model
         });
     }
 
-    public function likeable(): \Illuminate\Database\Eloquent\Relations\MorphTo
+    public function likeable(): MorphTo
     {
         return $this->morphTo();
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function user()
     {
@@ -54,7 +56,7 @@ class Like extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function liker()
     {
@@ -62,7 +64,7 @@ class Like extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Builder
+     * @return Builder
      */
     public function scopeWithType(Builder $query, string $type)
     {

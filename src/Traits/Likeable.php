@@ -4,6 +4,7 @@ namespace Overtrue\LaravelLike\Traits;
 
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 trait Likeable
 {
@@ -23,7 +24,7 @@ trait Likeable
     /**
      * Return followers.
      */
-    public function likers(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    public function likers(): BelongsToMany
     {
         return $this->belongsToMany(
             config('like.user_model') ?? config('auth.providers.users.model'),

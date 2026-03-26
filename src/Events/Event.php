@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Event
 {
     /**
-     * @var \Illuminate\Database\Eloquent\Model
+     * @var Model
      */
     public $like;
 

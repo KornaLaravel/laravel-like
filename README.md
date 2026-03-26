@@ -8,6 +8,8 @@
 
 ## Installing
 
+> Version 6.x requires **PHP 8.3+** and **Laravel 13+**.
+
 ```shell
 composer require overtrue/laravel-like -vvv
 ```

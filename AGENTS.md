@@ -6,8 +6,8 @@ Package: **overtrue/laravel-like**
 Like / favorite-style interactions for Eloquent models.
 
 ## Compatibility Targets
-- Laravel: **^9|^10|^11|^12|^13**
-- PHP: follow Laravel requirements (Laravel 13 requires PHP 8.3+)
+- Laravel: **^13**
+- PHP: **^8.3**
 
 ## Local Development
 ```bash
